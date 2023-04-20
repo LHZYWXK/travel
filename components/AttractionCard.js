@@ -8,10 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 const AttractionCard = ({
   id,
   imgUrl,
-  // title,
   attractionName,
   rating,
-  // genre,
   districtName,
   address,
   description,

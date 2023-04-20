@@ -11,7 +11,7 @@ const FeaturedRow = ({ id, title, description }) => {
     const getAttractions = async () => {
       const result = await sanityClient.fetch(
         // `*[_type=="featured" && _id == $id]{...,attractions[]->{..., district->{name}}}[0]`,
-        '*[_type == "featured" && _id == $id]{..., attractions[] -> {..., district->{name}, comments[] -> {...,}}}[0]',
+        '*[_type=="featured" && _id==$id]{...,attractions[]->{...,district->{name},comments[]->{...,}}}[0]',
         { id }
       );
       console.log(result);
@@ -42,10 +42,8 @@ const FeaturedRow = ({ id, title, description }) => {
             key={attraction._id}
             id={attraction._id}
             imgUrl={attraction.image}
-            // title={attraction.name}
             attractionName={attraction.name}
             rating={attraction.rating}
-            // genre={attraction.district?.name}
             districtName={attraction.district?.name}
             address={attraction.address}
             description={attraction.description}

@@ -22,8 +22,7 @@ const DistrictScreen = () => {
   useEffect(() => {
     const getAttractions = async () => {
       const result = await sanityClient.fetch(
-        `*[_type == "attraction" && district->_id == $id]{...,district->{...,}}
-      `,
+        `*[_type == "attraction" && district->_id == $id]{...,comments[]->{...,},district->{...,}}`,
         { id: _id }
       );
       setAttractions(result);
@@ -66,23 +65,25 @@ const DistrictScreen = () => {
             rating,
             district,
             address,
-            short_description,
+            description,
             long,
             lat,
             introduction,
+            comments,
           }) => (
             <AttractionCard
               key={_id}
               id={_id}
               imgUrl={image}
-              title={name}
+              attractionName={name}
               rating={rating}
-              genre={district?.name}
+              districtName={district?.name}
               address={address}
-              short_description={short_description}
+              description={description}
               long={long}
               lat={lat}
               introduction={introduction}
+              comments={comments}
             />
           )
         )}
